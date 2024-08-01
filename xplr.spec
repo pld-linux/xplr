@@ -19,7 +19,7 @@ BuildRequires:	rpmbuild(macros) >= 2.004
 BuildRequires:	rust
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
-ExclusiveArch:	%{rust_arches}
+ExclusiveArch:	%{ix86} %{x8664} aarch64 armv6hl armv7hl armv7hnl
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
