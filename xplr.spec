@@ -12,6 +12,9 @@ Source1:	%{name}-crates-%{crates_ver}.tar.xz
 # Source1-md5:	8fc446b98dc0b07a3f062506878a6dda
 URL:		https://xplr.dev
 BuildRequires:	cargo
+BuildRequires:	luajit-devel < 2.2
+BuildRequires:	luajit-devel >= 2.0.4
+BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(macros) >= 2.004
 BuildRequires:	rust
 BuildRequires:	tar >= 1:1.22
@@ -56,7 +59,7 @@ EOF
 %build
 export CARGO_HOME="$(pwd)/.cargo"
 
-%cargo_build --frozen
+%cargo_build --frozen --no-default-features
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -64,7 +67,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_mandir}/man1
 export CARGO_HOME="$(pwd)/.cargo"
 
-%cargo_install --frozen --root $RPM_BUILD_ROOT%{_prefix} --path $PWD
+%cargo_install --frozen --no-default-features --root $RPM_BUILD_ROOT%{_prefix} --path $PWD
 %{__rm} $RPM_BUILD_ROOT%{_prefix}/.crates*
 
 %clean
